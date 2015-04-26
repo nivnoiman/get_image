@@ -28,3 +28,4 @@ get_image(array(
         'link_target' => '',    // can get _blank | _self | _parent | _top
         'errorMsg' => 'false',  // error message trigger
     ));
+
