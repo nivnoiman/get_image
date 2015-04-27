@@ -1,18 +1,21 @@
 # get_image
-WordPress - make it easy
+##WordPress - make it easy
 
 
--How to use -
+#-How to use -
 First include this -func_get_image.php- to your project.
 
 In your php code just type
-get_image();
+
+## get_image();
 
 
 For more options :
 
-get_image(array(
 
+
+        get_image(array(
+        
         'value' => '',          // URL | Object 
         
         'system' => '',         // Redux | Field | Url
@@ -45,3 +48,8 @@ get_image(array(
         
     ));
 
+
+Use get_image instead redux['id'] or get_field('id');
+
+like -
+get_image(array('system'=>'redux', 'value'=>redux['id']));
