@@ -12,6 +12,7 @@
         'value' => '',          // URL | Object 
         'system' => '',         // Redux | Field | Url
         'id' => '',             // ID of the img tag [ < img id ='' /> ]
+        'default' =>'false'     // by default is false. true will show your default image if you have error with your value.
         'size' => '',           // the name of the size ID of the picture ]
         'wrap' => '',           // can be additional wrap to this image ( for example : <div></div> )
         'default_src' => '',    // the src link to the default image [ 3 conditional : 1 - link | 2 - null | 3 - name.file ]
@@ -73,6 +74,8 @@ function get_image(array $init){
     $isThumbnail = fasle; // System -> Thumbnail Flag
     $isUrl = fasle; // System -> Url Flag
     
+    $defaultFlag = false;
+    
     $goDefault = false; // if is true print all default.
     $printThumbnail = false; // if is true print the thumbnail of this page.
     
@@ -82,6 +85,14 @@ function get_image(array $init){
 
 /************IMAGE DEFINE************
 ####################################*/
+
+    // Default Image Define
+    if( empty( $init['default'] ) ){
+        $defaultFlag = false;
+    }
+    else{
+        $defaultFlag = $init['default'];
+    }
 
     // Image Size Define
     if( empty( $init['size'] ) ){
@@ -184,7 +195,7 @@ function get_image(array $init){
     else{ // START -if Value is not empty
     
         if( !filter_var( $init['value'],FILTER_VALIDATE_URL ) ){ // START - If Value is NOT Link
-            
+        
             switch( $init['system'] ){
                 case 'redux':
                     $isRedux = true;
@@ -212,6 +223,7 @@ function get_image(array $init){
                 
                 // Check if this Field Object is exists
                 if( is_array( $init['value'] ) ){ // exists
+                    
                     $imageField = $init['value'];
                     
                     if( $imageSize == ''){ // if Size not announced
@@ -388,11 +400,15 @@ function get_image(array $init){
     }
     else{ // if error message flat is false
         if( !$errorFlag ){
-            return $result; 
+            if(  ( !$defaultFlag ) && ( $imageSrc == '' ) ){ // if default flag is false and you need to go default
+                return '';
+            }
+            else{
+                return $result;
+            } 
         }
     }
 
 /*################ END ################*/
 
 };
-
