@@ -22,6 +22,8 @@ For more options :
         
         'id' => '',             // ID of the img tag [ < img id ='' /> ]
         
+        'default' =>'false'     // by default is false. true will show your default image if you have error with your value.
+        
         'size' => '',           // the name of the size ID of the picture ]
         
         'wrap' => '',           // can be additional wrap to this image ( for example : <div></div> )
