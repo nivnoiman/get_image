@@ -268,7 +268,7 @@ function get_image(array $init){
                         $imageSrc = $imageRedux['url'];
                     }
                     else{ // if Size announced
-                        $imageSrc_size = wp_get_attachment_image_src( $imageRedux['id'],'size-id');
+                        $imageSrc_size = wp_get_attachment_image_src( $imageRedux['id'],'$imageSize');
                         $imageSrc = $imageSrc_size[0];
                     }
                     
