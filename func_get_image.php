@@ -69,10 +69,10 @@ function get_image(array $init){
     }
         
     
-    $isRedux = fasle; // System -> Redux Flag
-    $isField = fasle; // System -> Field Flag
-    $isThumbnail = fasle; // System -> Thumbnail Flag
-    $isUrl = fasle; // System -> Url Flag
+    $isRedux = false; // System -> Redux Flag
+    $isField = false; // System -> Field Flag
+    $isThumbnail = false; // System -> Thumbnail Flag
+    $isUrl = false; // System -> Url Flag
     
     $defaultFlag = false;
     
@@ -218,9 +218,7 @@ function get_image(array $init){
                     $goDefault = true;
                 break;
             }
-            
             if( $isField ){
-                
                 // Check if this Field Object is exists
                 if( is_array( $init['value'] ) ){ // exists
                     
@@ -258,11 +256,9 @@ function get_image(array $init){
                     $goDefault = true;
                     $errorMsg .= '<p class="nn-warrning">'.WARRNING_FIELD_IS_EMPTY.'</p>';                
                 }
-    
             }
             
             else if( $isRedux ){
-                
                 // Check if this Redux Object is exists
                 if( is_array( $init['value'] ) ){ // exists
                     
@@ -272,7 +268,8 @@ function get_image(array $init){
                         $imageSrc = $imageRedux['url'];
                     }
                     else{ // if Size announced
-                        $imageSrc = $imageRedux['sizes'][$imageSize];
+                        $imageSrc_size = wp_get_attachment_image_src( $imageRedux['id'],'size-id');
+                        $imageSrc = $imageSrc_size[0];
                     }
                     
                     if( empty( $init['alt'] ) ){ // if Image Function Alt is NULL
