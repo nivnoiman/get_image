@@ -11,6 +11,7 @@
     get_image(array(
         'value' => '',          // URL | Object 
         'system' => '',         // Redux | Field | Url
+        'style' =>              // Image Style - STRING
         'id' => '',             // ID of the img tag [ < img id ='' /> ]
         'default' =>'false'     // by default is false. true will show your default image if you have error with your value.
         'size' => '',           // the name of the size ID of the picture ]
@@ -64,6 +65,7 @@ function get_image(array $init){
     $errorMsg = ''; //error content
     $init_errorMsg = false; //error message trigger
     
+    
     if( $init['errorMsg'] ){
         $init_errorMsg = $init['errorMsg'];
     }
@@ -86,6 +88,11 @@ function get_image(array $init){
 /************IMAGE DEFINE************
 ####################################*/
 
+
+    if( $init['style'] ){
+        $imageStyle = 'style="' . $init['style'] . '"';
+    }
+    
     // Default Image Define
     if( empty( $init['default'] ) ){
         $defaultFlag = false;
@@ -339,20 +346,20 @@ function get_image(array $init){
     if( !$goDefault ){ // if goDefault is false result -> As planned
     
         if( empty( $init['id'] ) ){
-            $result = '<img src="'.$imageSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" />';
+            $result = '<img src="'.$imageSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" '.$imageStyle.' />';
         }
         else{
-            $result = '<img id="'.$init['id'].'" src="'.$imageSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" />';   
+            $result = '<img id="'.$init['id'].'" src="'.$imageSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" '.$imageStyle.' />';   
         }
     
     } // END - if goDefault is false
     else{ // if goDefault is true result -> default
     
         if( empty( $init['id'] ) ){
-            $result = '<img src="'.$imageDefaultSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" />';
+            $result = '<img src="'.$imageDefaultSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" '.$imageStyle.' />';
         }
         else{
-            $result = '<img id="'.$init['id'].'" src="'.$imageDefaultSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" />';   
+            $result = '<img id="'.$init['id'].'" src="'.$imageDefaultSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" '.$imageStyle.' />';   
         }
     
     } // END - if goDefault is true   
