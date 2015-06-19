@@ -232,10 +232,13 @@ function get_image(array $init){
                     $imageField = $init['value'];
                     
                     if( $imageSize == ''){ // if Size not announced
-                        $imageSrc = $imageField['url'];    
+                        $imageSrc = $imageField['url'];
                     }
                     else{ // if Size announced
-                        $imageSrc = $imageField['sizes'][$imageSize];
+                        if( $imageSrc )
+                            $imageSrc = $imageField['sizes'][$imageSize];
+                        else
+                            $imageSrc = $imageField['url'];
                     }
                     
                     if( empty( $init['alt'] ) ){ // if Image Function Alt is NULL
