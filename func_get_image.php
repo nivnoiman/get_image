@@ -235,10 +235,11 @@ function get_image(array $init){
                         $imageSrc = $imageField['url'];
                     }
                     else{ // if Size announced
-                        if( $imageSrc )
+                        if( $imageField['sizes'][$imageSize] )
                             $imageSrc = $imageField['sizes'][$imageSize];
                         else
                             $imageSrc = $imageField['url'];
+                            
                     }
                     
                     if( empty( $init['alt'] ) ){ // if Image Function Alt is NULL
@@ -279,7 +280,10 @@ function get_image(array $init){
                     }
                     else{ // if Size announced
                         $imageSrc_size = wp_get_attachment_image_src( $imageRedux['id'],$imageSize);
-                        $imageSrc = $imageSrc_size[0];
+                        if( $imageSrc_size[0] )
+                            $imageSrc = $imageSrc_size[0];
+                        else
+                            $imageSrc = $imageRedux['url'];
                     }
                     
                     if( empty( $init['alt'] ) ){ // if Image Function Alt is NULL
