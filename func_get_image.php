@@ -15,6 +15,7 @@
         'id' => '',             // ID of the img tag [ < img id ='' /> ]
         'default' =>'false'     // by default is false. true will show your default image if you have error with your value.
         'size' => '',           // the name of the size ID of the picture ]
+        'placehold',            // placehold.it Size [ string : e.g - 300X500 ]
         'wrap' => '',           // can be additional wrap to this image ( for example : <div></div> )
         'default_src' => '',    // the src link to the default image [ 3 conditional : 1 - link | 2 - null | 3 - name.file ]
         'alt' => '',            // string or null - if null the input get the name of the image
@@ -47,7 +48,8 @@ function get_image(array $init){
     define( 'THEME_ROOT',                   get_stylesheet_directory() );
     define( 'THEME_DIRECTORY_PATH',         '/images/' );
     define( 'DEFAULT_SRC_FILE',             'default.png' );
-    define( 'DEFAULT_SRC_LINK',             'http://placehold.it/350x150'  );
+    define( 'DEFAULT_SRC_LINK',             ''  );
+    define( 'DEFAULT_PLACEHOLD',            '350x150'  );
     define( 'DEFAULT_SIZE',                 ''  );
     define( 'DEFAULT_IMG_CLASS',            'nn-image'  );
     define( 'DEFAULT_IMG_ALT',              __('Image','NN-Funciton')  );
@@ -109,6 +111,14 @@ function get_image(array $init){
         $imageSize = $init['size'];
     }
     
+    // Image Default Size PlaceHold.it
+    if( empty( $init['placehold'] ) ){
+        $defaultImageSize = DEFAULT_PLACEHOLD;
+    }
+    else{
+        $defaultImageSize = $init['placehold'];
+    }
+    
     // Image Default Src Define
     if( empty( $init['default_src'] ) ){ // if default src not exist
         
@@ -117,7 +127,10 @@ function get_image(array $init){
             $imageDefaultSrc = THEME.THEME_DIRECTORY_PATH.DEFAULT_SRC_FILE;    
         }
         else{
-            $imageDefaultSrc = DEFAULT_SRC_LINK;
+            if( DEFAULT_SRC_LINK == '' )
+                $imageDefaultSrc = 'http://placehold.it/'.$defaultImageSize;
+            else
+                $imageDefaultSrc = DEFAULT_SRC_LINK;
         }
         
     }
@@ -131,7 +144,10 @@ function get_image(array $init){
                 $imageDefaultSrc = THEME.THEME_DIRECTORY_PATH.$init['default_src'];    
             }
             else{
-                $imageDefaultSrc = DEFAULT_SRC_LINK;
+                if( DEFAULT_SRC_LINK == '' )
+                    $imageDefaultSrc = 'http://placehold.it/'.$defaultImageSize;
+                else
+                    $imageDefaultSrc = DEFAULT_SRC_LINK;
             }
         }
         
