@@ -44,28 +44,71 @@ function get_image(array $init){
 /*################ START - General ################*/
 
     // Define
-    define( 'THEME',                        get_template_directory_uri() );
-    define( 'THEME_ROOT',                   get_stylesheet_directory() );
-    define( 'THEME_DIRECTORY_PATH',         '/images/' );
-    define( 'DEFAULT_SRC_FILE',             'default.png' );
-    define( 'DEFAULT_SRC_LINK',             ''  );
-    define( 'DEFAULT_PLACEHOLD',            '350x150'  );
-    define( 'DEFAULT_SIZE',                 ''  );
-    define( 'DEFAULT_IMG_CLASS',            'nn-image'  );
-    define( 'DEFAULT_IMG_ALT',              __('Image','NN-Funciton')  );
-    define( 'DEFAULT_LINK_TARGET',          '_self'  );
-    define( 'DEFAULT_LINK_TITLE',           __('Image Link','NN-Funciton')  );
-    define( 'DEFAULT_LINK_CLASS',           'nn-image-link'  );
+    if( !defined('THEME') ){
+        define( 'THEME',                        get_template_directory_uri() );
+    }
+    if( !defined('THEME_ROOT') ){
+        define( 'THEME_ROOT',                   get_stylesheet_directory() );
+    }
+    if( !defined('THEME_DIRECTORY_PATH') ){
+        define( 'THEME_DIRECTORY_PATH',         '/images/' );
+    }
 
-    define( 'ERROR_VALUE_NULL',             __('Error - System: "value" need to be announced','NN-Funciton') );
-    define( 'WARRNING_FIELD_IS_EMPTY',      __('Warrning - System: "Field Array" is not exist','NN-Funciton') );
-    define( 'WARRNING_REDUX_IS_EMPTY',      __('Warrning - System: "Redux Array" is not exist','NN-Funciton') );
-    define( 'WARRNING_THUMBNAIL_IS_EMPTY',  __('Warrning - System: "Thumbnail Object" is empty','NN-Funciton') );
+    if( !defined('DEFAULT_SRC_FILE') ){
+        define( 'DEFAULT_SRC_FILE',             'default.png' );
+    }
+    if( !defined('DEFAULT_SRC_LINK') ){
+        define( 'DEFAULT_SRC_LINK',             ''  );
+    }
+    if( !defined('DEFAULT_PLACEHOLD') ){
+        define( 'DEFAULT_PLACEHOLD',            '350x150'  );
+    }
+    if( !defined('DEFAULT_SIZE') ){
+        define( 'DEFAULT_SIZE',                 ''  );
+    }
+    
+    if( !defined('DEFAULT_IMG_CLASS') ){
+        define( 'DEFAULT_IMG_CLASS',            'nn-image'  );
+    }
+    if( !defined('DEFAULT_IMG_ALT') ){
+        define( 'DEFAULT_IMG_ALT',              __('Image','NN-Funciton')  );
+    }
+    if( !defined('DEFAULT_LINK_TARGET') ){
+        define( 'DEFAULT_LINK_TARGET',          '_self'  );
+    }
 
+    if( !defined('DEFAULT_LINK_TITLE') ){
+        define( 'DEFAULT_LINK_TITLE',           __('Image Link','NN-Funciton')  );
+    }
+    if( !defined('DEFAULT_LINK_CLASS') ){
+        define( 'DEFAULT_LINK_CLASS',           'nn-image-link'  );
+    }
+    if( !defined('ERROR_VALUE_NULL') ){
+        define( 'ERROR_VALUE_NULL',             __('Error - System: "value" need to be announced','NN-Funciton') );
+    }
+    if( !defined('WARRNING_FIELD_IS_EMPTY') ){
+        define( 'WARRNING_FIELD_IS_EMPTY',      __('Warrning - System: "Field Array" is not exist','NN-Funciton') );
+    }  
+
+    if( !defined('WARRNING_REDUX_IS_EMPTY') ){
+        define( 'WARRNING_REDUX_IS_EMPTY',      __('Warrning - System: "Redux Array" is not exist','NN-Funciton') );
+    }
+    if( !defined('WARRNING_THUMBNAIL_IS_EMPTY') ){
+        define( 'WARRNING_THUMBNAIL_IS_EMPTY',  __('Warrning - System: "Thumbnail Object" is empty','NN-Funciton') );
+    }  
+
+    
     // Vars
     $errorFlag = false; //error flag
     $errorMsg = ''; //error content
     $init_errorMsg = false; //error message trigger
+    $imageStyle = '';
+    
+    $init['errorMsg'] = '';
+    $init['style'] = isset( $init['style'] ) ? $init['style'] : '';
+    $init['link'] = isset( $init['link'] ) ? $init['link'] : '';
+    $init['link_id'] = isset( $init['link_id'] ) ? $init['link_id'] : '';
+    $init['wrap'] = isset( $init['wrap'] ) ? $init['wrap'] : '';
     
     
     if( $init['errorMsg'] ){
