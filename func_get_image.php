@@ -402,7 +402,12 @@ function get_image(array $init){
     
     if( $printThumbnail ){ // if printThumbnail is true use thumbnail function
         if ( has_post_thumbnail() ) {
-            return the_post_thumbnail();
+            ob_start();
+                if( $imageSize )
+                    the_post_thumbnail( $imageSize );
+                else
+                    the_post_thumbnail();
+            $result = ob_get_clean();
         }
         else{
             $goDefault = true;
@@ -410,12 +415,14 @@ function get_image(array $init){
         
     }
     if( !$goDefault ){ // if goDefault is false result -> As planned
-    
-        if( empty( $init['id'] ) ){
-            $result = '<img src="'.$imageSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" '.$imageStyle.' />';
-        }
-        else{
-            $result = '<img id="'.$init['id'].'" src="'.$imageSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" '.$imageStyle.' />';   
+
+        if( !$printThumbnail ){
+            if( empty( $init['id'] ) ){
+                $result = '<img src="'.$imageSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" '.$imageStyle.' />';
+            }
+            else{
+                $result = '<img id="'.$init['id'].'" src="'.$imageSrc.'" class="'.$imageClass.'" alt="'.$imageAlt.'" '.$imageStyle.' />';   
+            }
         }
     
     } // END - if goDefault is false
@@ -448,7 +455,7 @@ function get_image(array $init){
         $string = explode('></',$init['wrap'] );
         $step = 0;
         $new_string = '';
-        
+
         foreach( $string as $value ){
             
             if( count($string) > $step){
@@ -470,7 +477,7 @@ function get_image(array $init){
     }
     else{ // if error message flat is false
         if( !$errorFlag ){
-            if(  ( !$defaultFlag ) && ( $imageSrc == '' ) ){ // if default flag is false and you need to go default
+            if(  ( !$defaultFlag ) && ( $imageSrc == '' ) && !$printThumbnail ){ // if default flag is false and you need to go default
                 return '';
             }
             else{
