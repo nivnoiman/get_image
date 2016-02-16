@@ -16,9 +16,9 @@ For more options :
 
         get_image(array(
         
-        'value' => '',          // URL | Object 
+        'value' => '',          // URL | Object | ID
         
-        'system' => '',         // Redux | Field | Url
+        'system' => '',         // Redux | Field / ACF | Url
         
         'id' => '',             // ID of the img tag [ < img id ='' /> ]
         
